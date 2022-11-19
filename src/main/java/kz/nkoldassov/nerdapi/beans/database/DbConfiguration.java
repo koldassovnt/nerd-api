@@ -1,0 +1,29 @@
+package kz.nkoldassov.nerdapi.beans.database;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import kz.nkoldassov.nerdapi.configs.DbConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class DbConfiguration {
+
+    @Autowired
+    private DbConfig dbConfig;
+
+    @Bean
+    public DataSource dataSource() {
+
+        var config = new HikariConfig();
+        config.setDriverClassName("org.postgresql.Driver");
+        config.setJdbcUrl(dbConfig.url());
+        config.setUsername(dbConfig.username());
+        config.setPassword(dbConfig.password());
+
+        return new HikariDataSource(config);
+    }
+}

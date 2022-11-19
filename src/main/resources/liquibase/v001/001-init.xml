@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet author="nkoldassov" id="test-init">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+      create schema if not exists test_schema;;
+
+      create table if not exists test_schema.test_table (label varchar(50));;
+      ]]></sql>
+    </changeSet>
+
+</databaseChangeLog>
