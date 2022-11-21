@@ -1,3 +1,5 @@
+version: '3.8'
+
 networks:
   default:
     name: nerd-api-network
@@ -6,15 +8,22 @@ networks:
       config:
         - subnet: 172.28.0.0/16
 
+
 services:
+
   pg:
     container_name: db-nerd
     image: postgres:12
     restart: always
+    mem_limit: 700M
+    environment:
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "10018:5432"
-    mem_limit: 200M
-    environment:
-      - POSTGRES_USER=nerd
-      - POSTGRES_PASSWORD=BS8MJL4s0H5xi2VOSoqT0cMrEy6Ils
-      - POSTGRES_DB=nerd
+    volumes:
+      - pg:/var/lib/postgresql/data
+      - ./pg-init/init.sql:/docker-entrypoint-initdb.d/create-users.sql
+
+volumes:
+  pg:
+    driver: local

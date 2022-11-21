@@ -1,4 +1,4 @@
-package kz.nkoldassov.nerdapi.beans;
+package kz.nkoldassov.nerdapi.beans.all;
 
 import kz.nkoldassov.nerdapi.configs.DbConfig;
 import liquibase.Liquibase;

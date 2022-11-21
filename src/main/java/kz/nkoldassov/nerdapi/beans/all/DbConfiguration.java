@@ -1,4 +1,4 @@
-package kz.nkoldassov.nerdapi.beans.database;
+package kz.nkoldassov.nerdapi.beans.all;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

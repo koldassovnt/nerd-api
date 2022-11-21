@@ -1,4 +1,4 @@
-package kz.nkoldassov.nerdapi.beans;
+package kz.nkoldassov.nerdapi.beans.for_tests;
 
 import kz.nkoldassov.nerdapi.configs.FactsApiConfig;
 import org.springframework.stereotype.Component;
