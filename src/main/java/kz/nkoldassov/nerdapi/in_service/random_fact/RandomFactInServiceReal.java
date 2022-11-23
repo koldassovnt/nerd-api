@@ -1,18 +1,21 @@
 package kz.nkoldassov.nerdapi.in_service.random_fact;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kz.nkoldassov.nerdapi.in_service.model.FactResponse;
+import kz.nkoldassov.nerdapi.logging.LOG;
 import lombok.SneakyThrows;
+import okhttp3.*;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
+import java.util.Arrays;
 
 public class RandomFactInServiceReal implements RandomFactInService {
 
+    private static final LOG log = LOG.forClass(RandomFactInServiceReal.class);
+
     private final String requestUrl;
     private final String apiKey;
+
+    OkHttpClient client = new OkHttpClient();
 
     public RandomFactInServiceReal(String requestUrl, String apiKey) {
         this.requestUrl = requestUrl;
@@ -22,21 +25,41 @@ public class RandomFactInServiceReal implements RandomFactInService {
     @SneakyThrows
     @Override
     public String getRandomFact() {
-        URL url = new URL(requestUrl + "1");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestProperty("accept", "application/json");
-        connection.setRequestProperty("X-Api-Key", apiKey);
+
+        log.info(() -> "7096vpW3Jt :: requestURl = " + requestUrl + ", apiKey = " + apiKey);
+
+        Request request = new Request.Builder()
+                .url(requestUrl + "1")
+                .addHeader("accept", "application/json")
+                .addHeader("X-Api-Key", apiKey)
+                .build();
+
+        log.info(() -> "zKfXCt15vo :: request = " + request);
 
         String fact = "RESPONSE ERROR";
 
-        try (InputStream responseStream = connection.getInputStream()) {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode root = mapper.readTree(responseStream);
+        Call call = client.newCall(request);
+        try (Response response = call.execute()) {
 
-            List<String> factList = root.findValuesAsText("fact");
+            ResponseBody responseBody = response.body();
 
-            if (!factList.isEmpty()) {
-                fact = factList.get(0);
+            if (responseBody != null) {
+                String responseStr = responseBody.string();
+
+                log.info(() -> "36Z9MixZP9 :: response = " + responseStr);
+
+                ObjectMapper mapper = new ObjectMapper();
+                FactResponse[] factResponses = mapper.readValue(responseStr, FactResponse[].class);
+
+                log.info(() -> "tCuz5l8e8e :: factResponses = " + Arrays.toString(factResponses));
+
+                if (factResponses.length > 0) {
+                    fact = factResponses[0].fact;
+                } else {
+                    log.error("z09VAxAeYg :: factResponse is empty");
+                }
+            } else {
+                log.error("leRj943xCM :: responseBody was null!");
             }
         }
 

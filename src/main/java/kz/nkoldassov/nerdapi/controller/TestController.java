@@ -14,7 +14,7 @@ import java.util.Date;
 public class TestController {
 
     @Autowired
-    private RandomFactInService randomFactInService;
+    private RandomFactInService randomFactInService; //todo nurlan потом вытащи в регистр
 
     @GetMapping("/hello")
     public String hello() {
