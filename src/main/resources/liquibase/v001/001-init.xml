@@ -13,4 +13,20 @@
       ]]></sql>
     </changeSet>
 
+    <changeSet author="nkoldassov" id="create-client-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists client
+       (
+           client      bigserial primary key,
+           email       varchar(100) unique,
+           password    varchar(255),
+           name        varchar(100),
+           surname     varchar(100),
+           actual      boolean                  default true,
+           updated_at  timestamp with time zone,
+           inserted_at timestamp with time zone default current_timestamp
+       );;
+      ]]></sql>
+    </changeSet>
+
 </databaseChangeLog>
