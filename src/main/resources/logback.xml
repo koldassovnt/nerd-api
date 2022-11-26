@@ -1,0 +1,69 @@
+<configuration>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.out</target>
+    <withJansi>true</withJansi>
+    <encoder>
+      <pattern>
+        %green(%d{yyyy-MM-dd'T'HH:mm:ss.SSS}) %cyan(%32.32logger{15}) %highlight(%-5level) %msg%n
+      </pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>INFO</level>
+    </filter>
+  </appender>
+
+  <appender name="TRACER_SMALL" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.err</target>
+    <encoder>
+      <pattern>
+        [%d{yyyy-MM-dd'T'HH:mm:ss.SSS}] [%mdc{LID}] %msg%n
+      </pattern>
+    </encoder>
+  </appender>
+
+  <appender name="SERVER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${user.home}/nerd.d/logs/server.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <fileNamePattern>${user.home}/nerd.d/logs/server.%i.log</fileNamePattern>
+      <minIndex>1</minIndex>
+      <maxIndex>21</maxIndex>
+    </rollingPolicy>
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <maxFileSize>5MB</maxFileSize>
+    </triggeringPolicy>
+    <encoder>
+      <pattern>
+        [%d{yyyy-MM-dd'T'HH:mm:ss.SSS}] [%mdc{LID}] [%logger{15}] [%-5level] %msg%n
+      </pattern>
+    </encoder>
+  </appender>
+
+  <!--         -->
+  <!-- Loggers -->
+  <!--         -->
+
+  <logger name="TRACER_SMALL" level="trace">
+    <appender-ref ref="TRACER_SMALL"/>
+  </logger>
+
+  <logger name="liquibase" level="INFO">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+  <logger name="org.springframework" level="INFO">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <logger name="kz.nkoldassov.nerdapi.beans.all.ShowConfigValuesOnStartup.java" level="INFO">
+    <appender-ref ref="STDOUT"/>
+  </logger>
+
+  <!--      -->
+  <!-- ROOT -->
+  <!--      -->
+
+  <root level="info">
+    <appender-ref ref="SERVER"/>
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>
