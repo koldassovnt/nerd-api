@@ -7,4 +7,6 @@ public interface ClientRepository {
     Client getClient(Long clientId);
 
     Client getClientByEmail(String email);
+
+    boolean existsByEmail(String email);
 }
