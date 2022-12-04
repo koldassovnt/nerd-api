@@ -4,15 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
+
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
-    public long client;
-    public String email;
-    public String password;
-    public String name;
-    public String surname;
+public class RefreshToken {
+    public long id;
+    public long clientId;
+    public String token;
+    public Date expiryDate;
     public Boolean actual;
 
     public boolean actual() {
