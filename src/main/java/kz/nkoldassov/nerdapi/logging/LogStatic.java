@@ -1,4 +1,4 @@
-package kz.nkoldassov.nerdapi.util;
+package kz.nkoldassov.nerdapi.logging;
 
 public class LogStatic {
 

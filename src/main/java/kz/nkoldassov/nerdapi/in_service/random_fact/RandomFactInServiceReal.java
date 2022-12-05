@@ -1,7 +1,7 @@
 package kz.nkoldassov.nerdapi.in_service.random_fact;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kz.nkoldassov.nerdapi.in_service.model.FactResponse;
+import kz.nkoldassov.nerdapi.in_service.random_fact.model.FactResponse;
 import kz.nkoldassov.nerdapi.logging.LOG;
 import lombok.SneakyThrows;
 import okhttp3.*;

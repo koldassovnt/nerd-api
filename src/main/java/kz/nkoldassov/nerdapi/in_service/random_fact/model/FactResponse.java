@@ -1,4 +1,4 @@
-package kz.nkoldassov.nerdapi.in_service.model;
+package kz.nkoldassov.nerdapi.in_service.random_fact.model;
 
 import lombok.ToString;
 
