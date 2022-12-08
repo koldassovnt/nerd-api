@@ -1,7 +1,7 @@
 package kz.nkoldassov.nerdapi.configs;
 
 import kz.greetgo.conf.hot.DefaultBoolValue;
-import kz.greetgo.conf.hot.DefaultLongValue;
+import kz.greetgo.conf.hot.DefaultIntValue;
 import kz.greetgo.conf.hot.DefaultStrValue;
 import kz.greetgo.conf.hot.Description;
 
@@ -13,22 +13,22 @@ public interface JwtSecurityConfig {
     String jwtSecret();
 
     @Description("JWT token expiration time in ms")
-    @DefaultLongValue(3600000)
-    long jwtExpirationMs();
+    @DefaultIntValue(3600000)
+    int jwtExpirationMs();
 
     @Description("JWT refresh token time in ms")
-    @DefaultLongValue(86400000)
-    long jwtRefreshExpirationMs();
+    @DefaultIntValue(86400000)
+    int jwtRefreshExpirationMs();
 
     @Description("Use for test")
     @DefaultBoolValue(true)
     boolean forTest();
 
     @Description("JWT token expiration time in ms for testing")
-    @DefaultLongValue(60000)
-    long jwtExpirationMsForTest();
+    @DefaultIntValue(60000)
+    int jwtExpirationMsForTest();
 
     @Description("JWT refresh token time in ms for testing")
-    @DefaultLongValue(120000)
-    long jwtRefreshExpirationMsForTest();
+    @DefaultIntValue(120000)
+    int jwtRefreshExpirationMsForTest();
 }

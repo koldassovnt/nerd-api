@@ -2,6 +2,7 @@ package kz.nkoldassov.nerdapi.db.jdbs.impl;
 
 import kz.nkoldassov.nerdapi.db.jdbs.RefreshTokenRepository;
 import kz.nkoldassov.nerdapi.db.model.RefreshToken;
+import kz.nkoldassov.nerdapi.logging.LOG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,8 @@ import java.sql.Timestamp;
 @SuppressWarnings("SqlDialectInspection")
 @Repository
 public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
+
+    private static final LOG log = LOG.forClass(RefreshTokenRepositoryImpl.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -40,6 +43,21 @@ public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
                         "from refresh_token " +
                         "where token = ?",
                 this::mapToRefreshToken, token);
+    }
+
+    @Override
+    public void saveRefreshToken(RefreshToken refreshToken) {
+        Object[] params = new Object[4];
+        params[0] = refreshToken.clientId;
+        params[1] = refreshToken.token;
+        params[2] = refreshToken.expiryDate;
+        params[3] = refreshToken.actual();
+
+        int inserted = jdbcTemplate.update(
+                "insert into refresh_token(client_id, token, expiry_date, actual)",
+                params);
+
+        log.info(() -> "Q2Ev86CUQh :: refreshToken inserted = " + inserted);
     }
 
     private RefreshToken mapToRefreshToken(ResultSet rs, int rowNum) throws SQLException {

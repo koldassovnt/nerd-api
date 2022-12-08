@@ -12,12 +12,12 @@ public class JwtSecurityConfigForTests implements JwtSecurityConfig {
     }
 
     @Override
-    public long jwtExpirationMs() {
+    public int jwtExpirationMs() {
         return 3600000;
     }
 
     @Override
-    public long jwtRefreshExpirationMs() {
+    public int jwtRefreshExpirationMs() {
         return 86400000;
     }
 
@@ -27,12 +27,12 @@ public class JwtSecurityConfigForTests implements JwtSecurityConfig {
     }
 
     @Override
-    public long jwtExpirationMsForTest() {
+    public int jwtExpirationMsForTest() {
         return 60000;
     }
 
     @Override
-    public long jwtRefreshExpirationMsForTest() {
+    public int jwtRefreshExpirationMsForTest() {
         return 120000;
     }
 }
