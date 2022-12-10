@@ -8,6 +8,8 @@ import okhttp3.*;
 
 import java.util.Arrays;
 
+import static kz.nkoldassov.nerdapi.util.ServiceCallStatic.RESPONSE_ERROR_TEXT;
+
 public class RandomFactInServiceReal implements RandomFactInService {
 
     private static final LOG log = LOG.forClass(RandomFactInServiceReal.class);
@@ -36,7 +38,7 @@ public class RandomFactInServiceReal implements RandomFactInService {
 
         log.info(() -> "zKfXCt15vo :: request = " + request);
 
-        String fact = "RESPONSE ERROR";
+        String fact = RESPONSE_ERROR_TEXT;
 
         Call call = client.newCall(request);
         try (Response response = call.execute()) {

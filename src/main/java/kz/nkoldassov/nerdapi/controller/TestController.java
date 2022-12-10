@@ -1,6 +1,6 @@
 package kz.nkoldassov.nerdapi.controller;
 
-import kz.nkoldassov.nerdapi.in_service.random_fact.RandomFactInService;
+import kz.nkoldassov.nerdapi.register.RandomFactRegister;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import java.util.Date;
 public class TestController {
 
     @Autowired
-    private RandomFactInService randomFactInService; //todo nurlan потом вытащи в регистр
+    private RandomFactRegister randomFactRegister;
 
     @GetMapping("/hello")
     public String hello() {
@@ -24,6 +24,6 @@ public class TestController {
     @SneakyThrows
     @GetMapping("/fact")
     public String fact() {
-        return randomFactInService.getRandomFact();
+        return randomFactRegister.getRandomFact();
     }
 }
