@@ -9,4 +9,6 @@ public interface ClientRepository {
     Client getClientByEmail(String email);
 
     boolean existsByEmail(String email);
+
+    void saveClient(Client client);
 }

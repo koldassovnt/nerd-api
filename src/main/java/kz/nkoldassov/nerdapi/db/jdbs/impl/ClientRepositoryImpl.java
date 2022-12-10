@@ -54,6 +54,11 @@ public class ClientRepositoryImpl implements ClientRepository {
                 }));
     }
 
+    @Override
+    public void saveClient(Client client) {
+        //todo nurlan end up here
+    }
+
     private Client mapToClient(ResultSet rs, int rowNum) throws SQLException {
         return new Client(
                 rs.getLong("client"),
