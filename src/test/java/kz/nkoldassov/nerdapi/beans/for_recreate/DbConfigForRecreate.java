@@ -18,7 +18,7 @@ public class DbConfigForRecreate implements DbConfig {
 
     @Override
     public int port() {
-        return 10018;
+        return 20018;
     }
 
     @Override

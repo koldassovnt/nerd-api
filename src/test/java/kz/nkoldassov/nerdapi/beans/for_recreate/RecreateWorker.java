@@ -29,7 +29,7 @@ public class RecreateWorker {
     public static void recreatePostgresDatabase(String dbName, String username) throws Exception {
 
         try (var connection = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:10018/postgres",
+                "jdbc:postgresql://localhost:20018/postgres",
                 "postgres", "postgres"
         )) {
 

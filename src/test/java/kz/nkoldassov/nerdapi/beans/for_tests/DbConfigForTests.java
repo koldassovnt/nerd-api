@@ -17,7 +17,7 @@ public class DbConfigForTests implements DbConfig {
 
     @Override
     public int port() {
-        return 10018;
+        return 20018;
     }
 
     @Override

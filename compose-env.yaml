@@ -19,7 +19,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "10018:5432"
+      - "20018:5432"
     volumes:
       - pg:/var/lib/postgresql/data
       - ./pg-init/init.sql:/docker-entrypoint-initdb.d/create-users.sql
