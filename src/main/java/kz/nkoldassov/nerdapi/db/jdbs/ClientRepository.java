@@ -10,5 +10,5 @@ public interface ClientRepository {
 
     boolean existsByEmail(String email);
 
-    void saveClient(Client client);
+    void saveClientForRegister(Client client);
 }

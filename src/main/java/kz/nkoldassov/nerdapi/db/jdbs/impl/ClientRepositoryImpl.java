@@ -20,7 +20,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public Client getClient(Long clientId) {
         return jdbcTemplate.queryForObject(
-                "select client, email, password, name, surname " +
+                "select client, email, password, name, surname, actual " +
                         "from client " +
                         "where client = ?",
                 this::mapToClient, clientId);
@@ -29,7 +29,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public Client getClientByEmail(String email) {
         return jdbcTemplate.queryForObject(
-                "select client, email, password, name, surname " +
+                "select client, email, password, name, surname, actual " +
                         "from client " +
                         "where email = ?",
                 this::mapToClient, email);
@@ -55,8 +55,12 @@ public class ClientRepositoryImpl implements ClientRepository {
     }
 
     @Override
-    public void saveClient(Client client) {
-        //todo nurlan end up here
+    public void saveClientForRegister(Client client) {
+        jdbcTemplate.update("insert into client(email, password, updated_at) values (?, ?, current_timestamp)",
+                ps -> {
+                    ps.setString(1, client.email);
+                    ps.setString(2, client.password);
+                });
     }
 
     private Client mapToClient(ResultSet rs, int rowNum) throws SQLException {

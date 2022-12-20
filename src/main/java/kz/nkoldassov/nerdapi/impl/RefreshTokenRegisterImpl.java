@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Component
-public class RefreshTokenRegisterImpl implements RefreshTokenRegister {// todo nurlan need test
+public class RefreshTokenRegisterImpl implements RefreshTokenRegister {
 
     @Autowired
     private JwtSecurityConfig jwtSecurityConfig;

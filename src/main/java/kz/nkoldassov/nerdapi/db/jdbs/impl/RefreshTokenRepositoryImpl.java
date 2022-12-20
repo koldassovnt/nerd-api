@@ -54,7 +54,7 @@ public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
         params[3] = refreshToken.actual();
 
         int inserted = jdbcTemplate.update(
-                "insert into refresh_token(client_id, token, expiry_date, actual)",
+                "insert into refresh_token(client_id, token, expiry_date, actual) values (?, ?, ?, ?)",
                 params);
 
         log.info(() -> "Q2Ev86CUQh :: refreshToken inserted = " + inserted);

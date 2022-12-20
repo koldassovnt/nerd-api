@@ -1,7 +1,6 @@
 package kz.nkoldassov.nerdapi.beans.security;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.SignatureException;
 import kz.nkoldassov.nerdapi.configs.JwtSecurityConfig;
 import kz.nkoldassov.nerdapi.logging.LOG;
 import kz.nkoldassov.nerdapi.logging.LogStatic;

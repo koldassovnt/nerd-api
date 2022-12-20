@@ -71,7 +71,7 @@ public class AuthRegisterImpl implements AuthRegister {
 
         Client client = Client.register(signUpRequest.email, passwordEncoder.encode(signUpRequest.password));
 
-        clientRepository.saveClient(client);
+        clientRepository.saveClientForRegister(client);
 
         return MessageResponse.of("vjXMGpHIJ8 :: successful registration!");
     }
