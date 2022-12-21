@@ -9,7 +9,7 @@ public interface RefreshTokenRegister {
 
     RefreshToken createRefreshToken(Long clientId);
 
-    RefreshToken verifyExpiration(RefreshToken clientId);
+    void verifyExpiration(RefreshToken refreshToken);
 
     int deleteRefreshTokenByClient(Long clientId);
 }

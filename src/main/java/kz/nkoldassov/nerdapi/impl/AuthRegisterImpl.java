@@ -78,6 +78,15 @@ public class AuthRegisterImpl implements AuthRegister {
 
     @Override
     public TokenRefreshResponse refreshToken(RefreshTokenRequest request) {
-        return null;//todo nurlan end up here
+
+        RefreshToken refreshToken = refreshTokenRegister.getByToken(request);
+
+        refreshTokenRegister.verifyExpiration(refreshToken);
+
+        Client client = clientRepository.getClient(refreshToken.clientId);
+
+        String token = jwtUtils.generateTokenFromUsername(client.email);
+
+        return TokenRefreshResponse.of(token, refreshToken.token);
     }
 }

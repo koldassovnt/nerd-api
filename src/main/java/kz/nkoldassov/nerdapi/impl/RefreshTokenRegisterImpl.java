@@ -55,6 +55,8 @@ public class RefreshTokenRegisterImpl implements RefreshTokenRegister {
             throw new RuntimeException("1kodCw1nEB :: no client by id = " + clientId);
         }
 
+        refreshTokenRepository.deleteByClient(clientId);
+
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.actual = true;
         refreshToken.clientId = clientId;
@@ -68,7 +70,7 @@ public class RefreshTokenRegisterImpl implements RefreshTokenRegister {
     }
 
     @Override
-    public RefreshToken verifyExpiration(RefreshToken refreshToken) {
+    public void verifyExpiration(RefreshToken refreshToken) {
         if (refreshToken == null) {
             throw new RuntimeException("w5F0Tx3UiL :: refreshToken was null");
         }
@@ -78,7 +80,7 @@ public class RefreshTokenRegisterImpl implements RefreshTokenRegister {
         }
 
         if (refreshToken.expiryDate.compareTo(new Date()) > 0) {
-            int deleted = refreshTokenRepository.deleteByClient(refreshToken.clientId);
+            int deleted = deleteRefreshTokenByClient(refreshToken.clientId);
 
             if (deleted != 1) {
                 throw new RuntimeException("zNKHJxoBii :: cannot delete refreshToken by clientId = " + refreshToken.clientId);
@@ -86,8 +88,6 @@ public class RefreshTokenRegisterImpl implements RefreshTokenRegister {
 
             throw new TokenRefreshException(refreshToken.token, "Refresh token was expired. Please make a new sign in request");
         }
-
-        return refreshToken;
     }
 
     @Override

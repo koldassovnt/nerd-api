@@ -22,7 +22,9 @@ public class JwtUtils {
     }
 
     public String generateTokenFromUsername(String username) {
-        return Jwts.builder().setSubject(username).setIssuedAt(new Date())
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtSecurityConfig.jwtExpirationMs()))
                 .signWith(SignatureAlgorithm.HS512, jwtSecurityConfig.jwtSecret())
                 .compact();
