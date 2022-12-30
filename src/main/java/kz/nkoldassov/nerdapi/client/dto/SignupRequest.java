@@ -18,4 +18,6 @@ public class SignupRequest {
     @Size(min = 6, max = 40)
     public String password;
 
+    public String name;
+    public String surname;
 }

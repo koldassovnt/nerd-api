@@ -9,6 +9,6 @@ public class SendEmailInServiceForTests implements SendEmailInService {
 
     @Override
     public void sendVerificationEmail(SendEmailRequest emailRequest) {
-        System.out.println(emailRequest);
+        System.out.println("Z6P19T4fvK :: emailRequest = " + emailRequest);
     }
 }

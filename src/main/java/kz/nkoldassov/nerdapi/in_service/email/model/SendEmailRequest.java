@@ -7,5 +7,4 @@ public class SendEmailRequest {
     public String subject;
     public String content;
     public String receiverEmail;
-    public String verifyUrl;
 }

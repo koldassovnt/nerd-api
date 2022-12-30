@@ -6,8 +6,11 @@ import kz.nkoldassov.nerdapi.client.dto.*;
 import kz.nkoldassov.nerdapi.db.jdbs.ClientRepository;
 import kz.nkoldassov.nerdapi.db.model.Client;
 import kz.nkoldassov.nerdapi.db.model.RefreshToken;
+import kz.nkoldassov.nerdapi.in_service.email.SendEmailInService;
+import kz.nkoldassov.nerdapi.in_service.email.model.SendEmailRequest;
 import kz.nkoldassov.nerdapi.register.AuthRegister;
 import kz.nkoldassov.nerdapi.register.RefreshTokenRegister;
+import kz.nkoldassov.nerdapi.util.RandomStrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,6 +39,9 @@ public class AuthRegisterImpl implements AuthRegister {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private SendEmailInService sendEmailInService;
+
     @Override
     public SignupResponse login(LoginRequest loginRequest) {
 
@@ -60,7 +66,7 @@ public class AuthRegisterImpl implements AuthRegister {
     }
 
     @Override
-    public MessageResponse register(SignupRequest signUpRequest) {
+    public MessageResponse register(SignupRequest signUpRequest, String siteUrl) {
         if (signUpRequest == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "1xpaNr0mUu :: signUpRequest is null");
         }
@@ -69,11 +75,39 @@ public class AuthRegisterImpl implements AuthRegister {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "YTWzJdg64z :: email is already taken");
         }
 
-        Client client = Client.register(signUpRequest.email, passwordEncoder.encode(signUpRequest.password));
+        String verificationCode = RandomStrUtil.generateStr(64);
+
+        Client client = Client.forRegister(signUpRequest.email,
+                passwordEncoder.encode(signUpRequest.password),
+                signUpRequest.name,
+                signUpRequest.surname,
+                verificationCode);
 
         clientRepository.saveClientForRegister(client);
 
+        sendEmailInService.sendVerificationEmail(getSendEmailRequest(client, siteUrl));
+
         return MessageResponse.of("vjXMGpHIJ8 :: successful registration!");
+    }
+
+    private SendEmailRequest getSendEmailRequest(Client client, String siteUrl) {
+        SendEmailRequest emailRequest = new SendEmailRequest();
+        emailRequest.receiverEmail = client.email;
+        emailRequest.subject = "Please verify your registration";
+
+        String verifyUrl = siteUrl + "/email/verify?code=" + client.verificationCode;
+
+        String content = "Dear [[name]],<br>"
+                + "Please click the link below to verify your registration:<br>"
+                + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+                + "Thank you,<br>"
+                + "NERD API.";
+        content = content.replace("[[name]]", client.fio());
+        content = content.replace("[[URL]]", verifyUrl);
+
+        emailRequest.content = content;
+
+        return emailRequest;
     }
 
     @Override

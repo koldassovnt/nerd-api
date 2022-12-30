@@ -29,4 +29,12 @@
       ]]></sql>
     </changeSet>
 
+    <changeSet author="nkoldassov" id="alter-client-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       alter table client
+       add column verification_code varchar(64),
+       add column email_approved    boolean default false;;
+      ]]></sql>
+    </changeSet>
+
 </databaseChangeLog>

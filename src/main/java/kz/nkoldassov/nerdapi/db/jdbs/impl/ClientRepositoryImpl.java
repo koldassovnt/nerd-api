@@ -56,10 +56,15 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public void saveClientForRegister(Client client) {
-        jdbcTemplate.update("insert into client(email, password, updated_at) values (?, ?, current_timestamp)",
+        jdbcTemplate.update("" +
+                        "insert into client(email, password, name, surname, verification_code, updated_at) " +
+                        "values (?, ?, ?, ?, ?, current_timestamp)",
                 ps -> {
                     ps.setString(1, client.email);
                     ps.setString(2, client.password);
+                    ps.setString(3, client.name);
+                    ps.setString(4, client.surname);
+                    ps.setString(5, client.verificationCode);
                 });
     }
 

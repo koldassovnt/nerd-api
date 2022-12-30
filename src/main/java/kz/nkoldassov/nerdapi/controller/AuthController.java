@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @CrossOrigin(origins = "*")
@@ -23,9 +24,15 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<MessageResponse> register(@Valid @RequestBody SignupRequest signUpRequest) {
-        MessageResponse messageResponse = authRegister.register(signUpRequest);
+    public ResponseEntity<MessageResponse> register(@Valid @RequestBody SignupRequest signUpRequest,
+                                                    HttpServletRequest request) {
+        MessageResponse messageResponse = authRegister.register(signUpRequest, getSiteURL(request));
         return ResponseEntity.ok(messageResponse);
+    }
+
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
     }
 
     @PostMapping("/refresh-token")

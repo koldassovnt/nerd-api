@@ -6,6 +6,6 @@ public class SendEmailInServiceFake implements SendEmailInService {
 
     @Override
     public void sendVerificationEmail(SendEmailRequest emailRequest) {
-        System.out.println(emailRequest);
+        System.out.println("mY4xf3PKY2 :: emailRequest = " + emailRequest);
     }
 }
