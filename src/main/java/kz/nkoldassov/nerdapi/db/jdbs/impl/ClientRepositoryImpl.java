@@ -20,7 +20,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public Client getClient(Long clientId) {
         return jdbcTemplate.queryForObject(
-                "select client, email, password, name, surname, actual " +
+                "select client, email, password, name, surname, actual, verification_code, email_approved " +
                         "from client " +
                         "where client = ?",
                 this::mapToClient, clientId);
@@ -29,7 +29,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public Client getClientByEmail(String email) {
         return jdbcTemplate.queryForObject(
-                "select client, email, password, name, surname, actual " +
+                "select client, email, password, name, surname, actual, verification_code, email_approved " +
                         "from client " +
                         "where email = ?",
                 this::mapToClient, email);
@@ -68,6 +68,26 @@ public class ClientRepositoryImpl implements ClientRepository {
                 });
     }
 
+    @Override
+    public Client getClientByVerificationCode(String code) {
+        return jdbcTemplate.queryForObject(
+                "select client, email, password, name, surname, actual, verification_code, email_approved " +
+                        "from client " +
+                        "where verification_code = ?",
+                this::mapToClient, code);
+    }
+
+    @Override
+    public void approveClientEmail(Long client) {
+        String sql =
+                "update client set email_approved = true " +
+                        "where client = ?";
+
+        Object[] param = new Object[]{client};
+
+        jdbcTemplate.update(sql, param);
+    }
+
     private Client mapToClient(ResultSet rs, int rowNum) throws SQLException {
         return new Client(
                 rs.getLong("client"),
@@ -75,7 +95,9 @@ public class ClientRepositoryImpl implements ClientRepository {
                 rs.getString("password"),
                 rs.getString("name"),
                 rs.getString("surname"),
-                rs.getBoolean("actual")
+                rs.getBoolean("actual"),
+                rs.getString("verification_code"),
+                rs.getBoolean("email_approved")
         );
     }
 }

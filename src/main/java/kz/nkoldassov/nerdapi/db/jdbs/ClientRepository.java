@@ -11,4 +11,8 @@ public interface ClientRepository {
     boolean existsByEmail(String email);
 
     void saveClientForRegister(Client client);
+
+    Client getClientByVerificationCode(String code);
+
+    void approveClientEmail(Long client);
 }

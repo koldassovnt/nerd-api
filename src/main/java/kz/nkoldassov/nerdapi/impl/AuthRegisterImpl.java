@@ -11,6 +11,7 @@ import kz.nkoldassov.nerdapi.in_service.email.model.SendEmailRequest;
 import kz.nkoldassov.nerdapi.register.AuthRegister;
 import kz.nkoldassov.nerdapi.register.RefreshTokenRegister;
 import kz.nkoldassov.nerdapi.util.RandomStrUtil;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -122,5 +123,20 @@ public class AuthRegisterImpl implements AuthRegister {
         String token = jwtUtils.generateTokenFromUsername(client.email);
 
         return TokenRefreshResponse.of(token, refreshToken.token);
+    }
+
+    @Override
+    public void approveEmailByVerificationCode(String code) {
+        if (Strings.isBlank(code)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ZwMfDwd7be :: verification code is blank");
+        }
+
+        Client client = clientRepository.getClientByVerificationCode(code);
+
+        if (client == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "8J4kx1NuUw :: no client by verification code = " + code);
+        }
+
+        clientRepository.approveClientEmail(client.client);
     }
 }

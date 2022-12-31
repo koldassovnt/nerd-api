@@ -1,5 +1,9 @@
 package kz.nkoldassov.nerdapi.controller;
 
+import kz.nkoldassov.nerdapi.client.dto.MessageResponse;
+import kz.nkoldassov.nerdapi.register.AuthRegister;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
@@ -7,11 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/email")
 public class EmailController {
 
-    //todo nurlan approve email
+    @Autowired
+    private AuthRegister authRegister;
 
     @GetMapping("/verify")
-    public String verifyClientEmail(@RequestParam("code") String code) {
-        System.out.println("w6iz5TN080 :: code = " + code);
-        return "Successfully verified!";
+    public ResponseEntity<MessageResponse> verifyClientEmail(@RequestParam("code") String code) {
+
+        authRegister.approveEmailByVerificationCode(code);
+
+        return ResponseEntity.ok(MessageResponse.of("Successfully verified!"));
     }
 }

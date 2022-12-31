@@ -8,4 +8,6 @@ public interface AuthRegister {
     MessageResponse register(SignupRequest signUpRequest, String siteUrl);
 
     TokenRefreshResponse refreshToken(RefreshTokenRequest request);
+
+    void approveEmailByVerificationCode(String code);
 }

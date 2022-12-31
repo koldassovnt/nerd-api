@@ -37,4 +37,11 @@
       ]]></sql>
     </changeSet>
 
+    <changeSet author="nkoldassov" id="add-constraint-client-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       alter table client
+       add constraint verification_code_unique unique(verification_code);;
+      ]]></sql>
+    </changeSet>
+
 </databaseChangeLog>

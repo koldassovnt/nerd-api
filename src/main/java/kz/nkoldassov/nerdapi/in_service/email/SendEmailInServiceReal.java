@@ -13,7 +13,7 @@ public class SendEmailInServiceReal implements SendEmailInService {
     private static final LOG log = LOG.forClass(SendEmailInServiceReal.class);
 
     private final JavaMailSenderImpl javaMailSender;
-    public SendEmailInServiceReal(SendEmailConfig sendEmailConfig) {//todo nurlan test real
+    public SendEmailInServiceReal(SendEmailConfig sendEmailConfig) {
         javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost(sendEmailConfig.host());
         javaMailSender.setPort(sendEmailConfig.port());
