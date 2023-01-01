@@ -6,6 +6,7 @@ import kz.nkoldassov.nerdapi.configs.DbConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
@@ -25,5 +26,10 @@ public class DbConfiguration {
         config.setPassword(dbConfig.password());
 
         return new HikariDataSource(config);
+    }
+
+    @Bean
+    public JdbcTemplate applicationDataConnection(){
+        return new JdbcTemplate(dataSource());
     }
 }

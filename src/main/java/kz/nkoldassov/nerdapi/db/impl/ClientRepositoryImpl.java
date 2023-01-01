@@ -1,21 +1,21 @@
-package kz.nkoldassov.nerdapi.db.jdbs.impl;
+package kz.nkoldassov.nerdapi.db.impl;
 
 import kz.nkoldassov.nerdapi.db.jdbs.ClientRepository;
 import kz.nkoldassov.nerdapi.db.model.Client;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
-import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @SuppressWarnings("SqlDialectInspection")
-@Repository
 public class ClientRepositoryImpl implements ClientRepository {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+
+    public ClientRepositoryImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public Client getClient(Long clientId) {

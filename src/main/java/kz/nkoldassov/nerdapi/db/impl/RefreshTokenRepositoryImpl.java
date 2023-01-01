@@ -1,11 +1,9 @@
-package kz.nkoldassov.nerdapi.db.jdbs.impl;
+package kz.nkoldassov.nerdapi.db.impl;
 
 import kz.nkoldassov.nerdapi.db.jdbs.RefreshTokenRepository;
 import kz.nkoldassov.nerdapi.db.model.RefreshToken;
 import kz.nkoldassov.nerdapi.logging.LOG;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -13,13 +11,15 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 @SuppressWarnings("SqlDialectInspection")
-@Repository
 public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
 
     private static final LOG log = LOG.forClass(RefreshTokenRepositoryImpl.class);
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+
+    public RefreshTokenRepositoryImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public int deleteByClient(long clientId) {
