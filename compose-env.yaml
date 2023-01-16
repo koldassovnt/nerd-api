@@ -6,7 +6,7 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.30.0.0/16
+        - subnet: 172.50.0.0/16
 
 
 services:
@@ -19,7 +19,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "20018:5432"
+      - "60018:5432"
     volumes:
       - pg:/var/lib/postgresql/data
       - ./pg-init/init.sql:/docker-entrypoint-initdb.d/create-users.sql

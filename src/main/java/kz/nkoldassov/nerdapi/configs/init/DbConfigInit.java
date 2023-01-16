@@ -17,7 +17,7 @@ public class DbConfigInit implements DbConfig {
 
     @Override
     public int port() {
-        return 20018;
+        return 60018;
     }
 
     @Override
