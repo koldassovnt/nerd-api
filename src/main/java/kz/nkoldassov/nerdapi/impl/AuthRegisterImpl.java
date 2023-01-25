@@ -86,7 +86,7 @@ public class AuthRegisterImpl implements AuthRegister {
 
         clientRepository.saveClientForRegister(client);
 
-        sendEmailInService.sendVerificationEmail(getSendEmailRequest(client, siteUrl));
+        sendEmailInService.sendEmail(getSendEmailRequest(client, siteUrl));
 
         return MessageResponse.of("vjXMGpHIJ8 :: successful registration!");
     }

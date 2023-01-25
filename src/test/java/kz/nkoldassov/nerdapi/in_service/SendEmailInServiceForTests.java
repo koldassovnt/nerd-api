@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class SendEmailInServiceForTests implements SendEmailInService {
 
     @Override
-    public void sendVerificationEmail(SendEmailRequest emailRequest) {
+    public void sendEmail(SendEmailRequest emailRequest) {
         System.out.println("Z6P19T4fvK :: emailRequest = " + emailRequest);
     }
 }

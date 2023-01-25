@@ -13,6 +13,7 @@ public class SendEmailInServiceReal implements SendEmailInService {
     private static final LOG log = LOG.forClass(SendEmailInServiceReal.class);
 
     private final JavaMailSenderImpl javaMailSender;
+
     public SendEmailInServiceReal(SendEmailConfig sendEmailConfig) {
         javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost(sendEmailConfig.host());
@@ -29,7 +30,7 @@ public class SendEmailInServiceReal implements SendEmailInService {
     }
 
     @Override
-    public void sendVerificationEmail(SendEmailRequest emailRequest) {
+    public void sendEmail(SendEmailRequest emailRequest) {
 
         log.info(() -> "5PGEfSFmVy :: emailRequest = " + emailRequest);
 
