@@ -17,6 +17,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.concurrent.atomic.AtomicReference;
 
 @EnableTransactionManagement
 @MapperScan(basePackageClasses = BeanConfigDao.class)
@@ -26,8 +27,35 @@ public class DbConfiguration {
     @Autowired
     private DbConfig dbConfig;
 
+    private final AtomicReference<HikariDataSource> dataSourceRef = new AtomicReference<>(null);
+
     @Bean
-    public DataSource dataSource() {
+    public DataSource getDataSource() {
+
+        {
+            final var ret = this.dataSourceRef.get();
+            if (ret != null) {
+                return ret;
+            }
+        }
+
+        synchronized (this.dataSourceRef) {
+            {
+                final var ret = this.dataSourceRef.get();
+                if (ret != null) {
+                    return ret;
+                }
+            }
+
+            {
+                final var dataSource = this.createDataSource();
+                this.dataSourceRef.set(dataSource);
+                return dataSource;
+            }
+        }
+    }
+
+    private HikariDataSource createDataSource() {
 
         var config = new HikariConfig();
         config.setDriverClassName("org.postgresql.Driver");
@@ -38,17 +66,14 @@ public class DbConfiguration {
         return new HikariDataSource(config);
     }
 
-    @Autowired
-    private DataSource dataSource;
-
     @Bean
     public JdbcTemplate applicationDataConnection(){
-        return new JdbcTemplate(dataSource());
+        return new JdbcTemplate(getDataSource());
     }
 
     @Bean
     public DataSourceTransactionManager txManager() {
-        return new DataSourceTransactionManager(dataSource);
+        return new DataSourceTransactionManager(getDataSource());
     }
 
     @Bean
@@ -59,7 +84,7 @@ public class DbConfiguration {
         configuration.setMapUnderscoreToCamelCase(true);
 
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setDataSource(getDataSource());
         sqlSessionFactoryBean.setConfiguration(configuration);
 
         return sqlSessionFactoryBean.getObject();
