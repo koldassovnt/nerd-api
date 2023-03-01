@@ -7,7 +7,7 @@ import java.util.List;
 
 @ToString
 public class LordOfTheRingsCharacterResponse {
-    public List<Doc> docs = new ArrayList<>();
+    public List<LordOfTheRingsCharacterDetailResponse> docs = new ArrayList<>();
     public Integer total;
     public Integer limit;
     public Integer offset;

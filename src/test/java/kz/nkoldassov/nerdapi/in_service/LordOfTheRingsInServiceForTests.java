@@ -1,8 +1,9 @@
 package kz.nkoldassov.nerdapi.in_service;
 
 import kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.LordOfTheRingsInService;
+import kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.character.LordOfTheRingsCharacterDetailResponse;
 import kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.character.LordOfTheRingsCharacterResponse;
-import kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.movie.Doc;
+import kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.movie.LordOfTheRingsMovieDetailResponse;
 import kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.movie.LordOfTheRingsMovieResponse;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ public class LordOfTheRingsInServiceForTests implements LordOfTheRingsInService 
 
     @Override
     public LordOfTheRingsMovieResponse getMovies() {
-        Doc movie = new Doc();
+        LordOfTheRingsMovieDetailResponse movie = new LordOfTheRingsMovieDetailResponse();
         movie.id = "77z3COM63hKi4Xkf2a0h";
         movie.name = "Test movie";
 
@@ -24,8 +25,8 @@ public class LordOfTheRingsInServiceForTests implements LordOfTheRingsInService 
 
     @Override
     public LordOfTheRingsCharacterResponse getCharacters() {
-        kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.character.Doc character =
-                new kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.character.Doc();
+        LordOfTheRingsCharacterDetailResponse character =
+                new LordOfTheRingsCharacterDetailResponse();
 
         character.id = "pAaYza2huIUip4o08RIo";
         character.name = "Test character";

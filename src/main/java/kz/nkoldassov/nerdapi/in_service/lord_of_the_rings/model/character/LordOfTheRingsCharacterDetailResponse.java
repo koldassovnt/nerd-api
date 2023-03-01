@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 
 @ToString
-public class Doc {
+public class LordOfTheRingsCharacterDetailResponse {
 
     @JsonProperty("_id")
     public String id;
