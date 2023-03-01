@@ -66,8 +66,8 @@ public class TestController {
         return people.toString();
     }
 
-    @GetMapping("/star-wars/planet")
-    public String starWarsPlanet() {
+    @GetMapping("/star-wars/planets")
+    public String starWarsPlanets() {
         StarWarsPlanetResponse planets = starWarsInService.getPlanets(1);
         return planets.toString();
     }
