@@ -20,7 +20,8 @@ public class StarWarsPersonDetailResponse {
     @JsonProperty("birth_year")
     public String birthYear;
     public String gender;
-    public String homeworld;
+    @JsonProperty("homeworld")
+    public String homeWorld;
     public List<String> films = new ArrayList<>();
     public List<String> species = new ArrayList<>();
     public List<String> vehicles = new ArrayList<>();
