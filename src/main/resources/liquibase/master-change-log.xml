@@ -7,5 +7,7 @@
 
     <include file="liquibase/v001/001-init.xml"/>
     <include file="liquibase/v001/002-security.xml"/>
+    <include file="liquibase/v001/003-star-wars.xml"/>
+    <include file="liquibase/v001/004-lord-of-the-rings.xml"/>
 
 </databaseChangeLog>

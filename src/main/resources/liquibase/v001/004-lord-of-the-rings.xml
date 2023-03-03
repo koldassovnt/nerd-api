@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet author="nkoldassov" id="create-lord-of-the-rings-character-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists lord_of_the_rings_character
+       (
+           id             bigserial     primary key,
+           external_id    varchar(255)  unique,
+           height         varchar(255),
+           race           varchar(255),
+           gender         varchar(255),
+           birth          varchar(255),
+           spouse         varchar(255),
+           death          varchar(255),
+           realm          varchar(255),
+           hair           varchar(255),
+           name           varchar(255),
+           actual         boolean                  default true,
+           inserted_at    timestamp with time zone default current_timestamp,
+           updated_at     timestamp with time zone
+       );;
+      ]]></sql>
+    </changeSet>
+
+    <changeSet author="nkoldassov" id="create-lord-of-the-rings-movie-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists lord_of_the_rings_movie
+       (
+           id                               bigserial     primary key,
+           external_id                      varchar(255)  unique,
+           name                             varchar(255),
+           runtime_in_minutes               integer,
+           budget_in_millions               integer,
+           box_office_revenue_in_millions   integer,
+           academy_award_nominations        integer,
+           academy_award_wins               integer,
+           rotten_tomatoes_score            integer,
+           actual                           boolean                  default true,
+           inserted_at                      timestamp with time zone default current_timestamp,
+           updated_at                       timestamp with time zone
+       );;
+      ]]></sql>
+    </changeSet>
+
+</databaseChangeLog>

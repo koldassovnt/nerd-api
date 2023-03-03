@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet author="nkoldassov" id="create-star-wars-person-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists star_wars_person
+       (
+           id             bigserial          primary key,
+           external_id    varchar(255)       unique,
+           name           varchar(255),
+           height         varchar(255),
+           mass           varchar(255),
+           birth_year     varchar(255),
+           home_world_id  varchar(255),
+           actual         boolean                  default true,
+           inserted_at    timestamp with time zone default current_timestamp,
+           updated_at     timestamp with time zone
+       );;
+      ]]></sql>
+    </changeSet>
+
+    <changeSet author="nkoldassov" id="create-star-wars-person-film-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists star_wars_person_film
+       (
+           person_id      varchar(255),
+           film_id        varchar(255),
+           inserted_at    timestamp with time zone default current_timestamp,
+           primary key    (person_id, film_id)
+       );;
+      ]]></sql>
+    </changeSet>
+
+    <changeSet author="nkoldassov" id="create-star-wars-film-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists star_wars_film
+       (
+           id             bigserial          primary key,
+           external_id    varchar(255)       unique,
+           title          varchar(255),
+           director       varchar(255),
+           producer       varchar(255),
+           release_date   varchar(255),
+           actual         boolean                  default true,
+           inserted_at    timestamp with time zone default current_timestamp,
+           updated_at     timestamp with time zone
+       );;
+      ]]></sql>
+    </changeSet>
+
+    <changeSet author="nkoldassov" id="create-star-wars-film-planet-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists star_wars_film_planet
+       (
+           film_id        varchar(255),
+           planet_id      varchar(255),
+           inserted_at    timestamp with time zone default current_timestamp,
+           primary key    (film_id, planet_id)
+       );;
+      ]]></sql>
+    </changeSet>
+
+    <changeSet author="nkoldassov" id="create-star-wars-planet-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists star_wars_planet
+       (
+           id             bigserial          primary key,
+           external_id    varchar(255)       unique,
+           name           varchar(255),
+           diameter       varchar(255),
+           climate        varchar(255),
+           terrain        varchar(255),
+           population     varchar(255),
+           actual         boolean                  default true,
+           inserted_at    timestamp with time zone default current_timestamp,
+           updated_at     timestamp with time zone
+       );;
+      ]]></sql>
+    </changeSet>
+
+    <changeSet author="nkoldassov" id="create-star-wars-planet-person-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists star_wars_planet_person
+       (
+           planet_id      varchar(255),
+           person_id      varchar(255),
+           inserted_at    timestamp with time zone default current_timestamp,
+           primary key    (planet_id, person_id)
+       );;
+      ]]></sql>
+    </changeSet>
+
+</databaseChangeLog>
