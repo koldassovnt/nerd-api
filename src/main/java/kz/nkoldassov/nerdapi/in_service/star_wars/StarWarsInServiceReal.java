@@ -1,6 +1,7 @@
 package kz.nkoldassov.nerdapi.in_service.star_wars;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import kz.nkoldassov.nerdapi.configs.StarWarsApiConfig;
 import kz.nkoldassov.nerdapi.in_service.star_wars.model.film.StarWarsFilmsResponse;
 import kz.nkoldassov.nerdapi.in_service.star_wars.model.people.StarWarsPeopleResponse;
@@ -46,7 +47,7 @@ public class StarWarsInServiceReal implements StarWarsInService {
         StarWarsFilmsResponse filmsResponse;
 
         Call call = client.newCall(request);
-        try(Response response = call.execute()) {
+        try (Response response = call.execute()) {
 
             ResponseBody responseBody = response.body();
 
@@ -59,9 +60,15 @@ public class StarWarsInServiceReal implements StarWarsInService {
             log.info(() -> "EX3zkCds66 :: response = " + responseStr);
 
             ObjectMapper mapper = new ObjectMapper();
-            filmsResponse = mapper.readValue(responseStr, StarWarsFilmsResponse.class);
+            try {
+                filmsResponse = mapper.readValue(responseStr, StarWarsFilmsResponse.class);
+            } catch (UnrecognizedPropertyException ex) {
+                log.info(() -> "J0qGzt2Y0Z :: catch exception = " + ex.getMessage());
+                filmsResponse = new StarWarsFilmsResponse();
+            }
 
-            log.info(() -> "F1ohHKsoGy :: filmsResponse = " + filmsResponse);
+            StarWarsFilmsResponse finalFilmsResponse = filmsResponse;
+            log.info(() -> "F1ohHKsoGy :: filmsResponse = " + finalFilmsResponse);
         }
 
         return filmsResponse;
@@ -88,7 +95,7 @@ public class StarWarsInServiceReal implements StarWarsInService {
         StarWarsPeopleResponse peopleResponse;
 
         Call call = client.newCall(request);
-        try(Response response = call.execute()) {
+        try (Response response = call.execute()) {
 
             ResponseBody responseBody = response.body();
 
@@ -101,9 +108,16 @@ public class StarWarsInServiceReal implements StarWarsInService {
             log.info(() -> "216n68DQR1 :: response = " + responseStr);
 
             ObjectMapper mapper = new ObjectMapper();
-            peopleResponse = mapper.readValue(responseStr, StarWarsPeopleResponse.class);
 
-            log.info(() -> "r89zJEJqCm :: peopleResponse = " + peopleResponse);
+            try {
+                peopleResponse = mapper.readValue(responseStr, StarWarsPeopleResponse.class);
+            } catch (UnrecognizedPropertyException ex) {
+                log.info(() -> "2vQqjTRSq2 :: catch exception = " + ex.getMessage());
+                peopleResponse = new StarWarsPeopleResponse();
+            }
+
+            StarWarsPeopleResponse finalPeopleResponse = peopleResponse;
+            log.info(() -> "r89zJEJqCm :: peopleResponse = " + finalPeopleResponse);
         }
 
         return peopleResponse;
@@ -130,7 +144,7 @@ public class StarWarsInServiceReal implements StarWarsInService {
         StarWarsPlanetResponse planetResponse;
 
         Call call = client.newCall(request);
-        try(Response response = call.execute()) {
+        try (Response response = call.execute()) {
 
             ResponseBody responseBody = response.body();
 
@@ -143,9 +157,16 @@ public class StarWarsInServiceReal implements StarWarsInService {
             log.info(() -> "6tzYcFTAKv :: response = " + responseStr);
 
             ObjectMapper mapper = new ObjectMapper();
-            planetResponse = mapper.readValue(responseStr, StarWarsPlanetResponse.class);
 
-            log.info(() -> "9zx7a9qrFR :: planetResponse = " + planetResponse);
+            try {
+                planetResponse = mapper.readValue(responseStr, StarWarsPlanetResponse.class);
+            } catch (UnrecognizedPropertyException ex) {
+                log.info(() -> "8E3vqL0MK5 :: catch exception = " + ex.getMessage());
+                planetResponse = new StarWarsPlanetResponse();
+            }
+
+            StarWarsPlanetResponse finalPlanetResponse = planetResponse;
+            log.info(() -> "9zx7a9qrFR :: planetResponse = " + finalPlanetResponse);
         }
 
         return planetResponse;
