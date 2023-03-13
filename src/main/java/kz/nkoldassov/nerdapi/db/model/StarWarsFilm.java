@@ -20,4 +20,10 @@ public class StarWarsFilm {
 
     public List<StarWarsPerson> characters = new ArrayList<>();
     public List<StarWarsPlanet> planets = new ArrayList<>();
+
+    public static StarWarsFilm of(String externalId) {
+        StarWarsFilm film = new StarWarsFilm();
+        film.externalId = externalId;
+        return film;
+    }
 }
