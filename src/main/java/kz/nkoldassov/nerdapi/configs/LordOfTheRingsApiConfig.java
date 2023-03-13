@@ -8,7 +8,7 @@ import kz.greetgo.conf.hot.Description;
 public interface LordOfTheRingsApiConfig {
 
     @Description("Access Token")
-    @DefaultStrValue("bN5VVQjpfEtV34KlTKQw")
+    @DefaultStrValue("el84oViDE32cu4q34mG8")
     String accessToken();
 
     @Description("Use fake")
