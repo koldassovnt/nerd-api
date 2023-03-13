@@ -1,13 +1,9 @@
 package kz.nkoldassov.nerdapi.controller;
 
-import kz.nkoldassov.nerdapi.db.model.LordOfTheRingsCharacter;
-import kz.nkoldassov.nerdapi.db.model.LordOfTheRingsMovie;
-import kz.nkoldassov.nerdapi.in_service.star_wars.StarWarsInService;
-import kz.nkoldassov.nerdapi.in_service.star_wars.model.film.StarWarsFilmsResponse;
-import kz.nkoldassov.nerdapi.in_service.star_wars.model.people.StarWarsPeopleResponse;
-import kz.nkoldassov.nerdapi.in_service.star_wars.model.planet.StarWarsPlanetResponse;
+import kz.nkoldassov.nerdapi.db.model.*;
 import kz.nkoldassov.nerdapi.register.LordOfTheRingsInServiceRegister;
 import kz.nkoldassov.nerdapi.register.RandomFactRegister;
+import kz.nkoldassov.nerdapi.register.StarWarsInServiceRegister;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,10 +23,10 @@ public class TestController {
     private RandomFactRegister randomFactRegister;
 
     @Autowired
-    private LordOfTheRingsInServiceRegister lordOfTheRingsInService;
+    private LordOfTheRingsInServiceRegister lordOfTheRingsInServiceRegister;
 
     @Autowired
-    private StarWarsInService starWarsInService;//todo nurlan потом вынести в регистр
+    private StarWarsInServiceRegister starWarsInServiceRegister;
 
     @GetMapping("/hello")
     public String hello() {
@@ -45,31 +41,31 @@ public class TestController {
 
     @GetMapping("/lord-of-the-rings/movies")
     public String lordOfTheRingsMovies() {
-        List<LordOfTheRingsMovie> movies = lordOfTheRingsInService.getMovies();
+        List<LordOfTheRingsMovie> movies = lordOfTheRingsInServiceRegister.getMovies();
         return String.valueOf(movies);
     }
 
     @GetMapping("/lord-of-the-rings/characters")
     public String lordOfTheRingsCharacters() {
-        List<LordOfTheRingsCharacter> characters = lordOfTheRingsInService.getCharacters();
+        List<LordOfTheRingsCharacter> characters = lordOfTheRingsInServiceRegister.getCharacters();
         return String.valueOf(characters);
     }
 
     @GetMapping("/star-wars/films")
     public String starWarsFilms() {
-        StarWarsFilmsResponse films = starWarsInService.getFilms(1);
-        return films.toString();
+        List<StarWarsFilm> films = starWarsInServiceRegister.getFilms(1);
+        return String.valueOf(films);
     }
 
     @GetMapping("/star-wars/people")
     public String starWarsPeople() {
-        StarWarsPeopleResponse people = starWarsInService.getPeople(1);
-        return people.toString();
+        List<StarWarsPerson> people = starWarsInServiceRegister.getPeople(1);
+        return String.valueOf(people);
     }
 
     @GetMapping("/star-wars/planets")
     public String starWarsPlanets() {
-        StarWarsPlanetResponse planets = starWarsInService.getPlanets(1);
-        return planets.toString();
+        List<StarWarsPlanet> planets = starWarsInServiceRegister.getPlanets(1);
+        return String.valueOf(planets);
     }
 }
