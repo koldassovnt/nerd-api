@@ -1,6 +1,8 @@
 package kz.nkoldassov.nerdapi.controller;
 
 import kz.nkoldassov.nerdapi.db.model.*;
+import kz.nkoldassov.nerdapi.in_service.superhero.SuperHeroInService;
+import kz.nkoldassov.nerdapi.in_service.superhero.model.SuperHeroInServiceResponse;
 import kz.nkoldassov.nerdapi.register.LordOfTheRingsInServiceRegister;
 import kz.nkoldassov.nerdapi.register.RandomFactRegister;
 import kz.nkoldassov.nerdapi.register.StarWarsInServiceRegister;
@@ -27,6 +29,9 @@ public class TestController {
 
     @Autowired
     private StarWarsInServiceRegister starWarsInServiceRegister;
+
+    @Autowired
+    private SuperHeroInService superHeroInService; //todo nurlan потом изменить на вызов регистра
 
     @GetMapping("/hello")
     public String hello() {
@@ -67,5 +72,17 @@ public class TestController {
     public String starWarsPlanets() {
         List<StarWarsPlanet> planets = starWarsInServiceRegister.getPlanets(1);
         return String.valueOf(planets);
+    }
+
+    @GetMapping("/super-heroes")
+    public String superHeroes() {
+        List<SuperHeroInServiceResponse> heroes = superHeroInService.getHeroes();
+        return String.valueOf(heroes);
+    }
+
+    @GetMapping("/super-villains")
+    public String superVillains() {
+        List<SuperHeroInServiceResponse> villains = superHeroInService.getVillains();
+        return String.valueOf(villains);
     }
 }

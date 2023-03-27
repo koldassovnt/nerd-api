@@ -39,4 +39,9 @@ public class AllConfigFactory extends FileConfigFactory {
     public StarWarsApiConfig createStarWarsApiConfig() {
         return createConfig(StarWarsApiConfig.class);
     }
+
+    @Bean
+    public SuperHeroApiConfig createSuperHeroApiConfig() {
+        return createConfig(SuperHeroApiConfig.class);
+    }
 }
