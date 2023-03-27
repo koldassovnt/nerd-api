@@ -12,7 +12,7 @@ public interface SuperHeroApiConfig {
     boolean useFake();
 
     @Description("X-RapidAPI-Key value")
-    @DefaultStrValue("15cebb34a1msh96e9f3ae0be8e44p1319eejsn77b84bc6ea33")
+    @DefaultStrValue("YOUR_API_KEY")
     String apiKey();
 
     @Description("X-RapidAPI-Host value")
