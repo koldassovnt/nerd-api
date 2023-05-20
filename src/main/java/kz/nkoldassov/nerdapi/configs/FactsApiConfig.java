@@ -12,7 +12,7 @@ public interface FactsApiConfig {
     String requestUrl();
 
     @Description("Api key")
-    @DefaultStrValue("A5SL+QhMVyb3Qa5sfsyFjA==zRkN6cZiKc5vqhIR")
+    @DefaultStrValue("YOUR_API_KEY")
     String apiKey();
 
     @Description("Use fake")
