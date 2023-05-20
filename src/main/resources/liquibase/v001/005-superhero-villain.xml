@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <changeSet author="nkoldassov" id="create-super-hero-villain-table">
+        <sql endDelimiter=";;" splitStatements="true"> <![CDATA[
+       create table if not exists super_hero_villain
+       (
+           id                   bigserial     primary key,
+           external_id          int           unique,
+           name                 varchar(255),
+           slug                 varchar(255),
+           fullName             varchar(255),
+           alterEgos            varchar(255),
+           aliases              varchar(255),
+           firstAppearance      varchar(255),
+           publisher            varchar(255),
+           alignment            varchar(255),
+           imageUrl             varchar(255),
+           actual               boolean                  default true,
+           inserted_at          timestamp with time zone default current_timestamp,
+           updated_at           timestamp with time zone
+       );;
+      ]]></sql>
+    </changeSet>
+
+</databaseChangeLog>

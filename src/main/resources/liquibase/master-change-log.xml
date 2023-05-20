@@ -9,5 +9,6 @@
     <include file="liquibase/v001/002-security.xml"/>
     <include file="liquibase/v001/003-star-wars.xml"/>
     <include file="liquibase/v001/004-lord-of-the-rings.xml"/>
+    <include file="liquibase/v001/005-superhero-villain.xml"/>
 
 </databaseChangeLog>

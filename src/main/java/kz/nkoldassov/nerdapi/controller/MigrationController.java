@@ -2,6 +2,7 @@ package kz.nkoldassov.nerdapi.controller;
 
 import kz.nkoldassov.nerdapi.register.LordOfTheRingsInServiceRegister;
 import kz.nkoldassov.nerdapi.register.StarWarsInServiceRegister;
+import kz.nkoldassov.nerdapi.register.SuperHeroInServiceRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,9 @@ public class MigrationController {
 
     @Autowired
     private StarWarsInServiceRegister starWarsInServiceRegister;
+
+    @Autowired
+    private SuperHeroInServiceRegister superHeroInServiceRegister;
 
     @GetMapping("/lord-of-the-rings/movies")
     public String lordOfTheRingsMovies() {
@@ -46,6 +50,18 @@ public class MigrationController {
     @GetMapping("/star-wars/planets")
     public String starWarsPlanets() {
         starWarsInServiceRegister.migratePlanets();
+        return "ok";
+    }
+
+    @GetMapping("/superhero")
+    public String superHero() {
+        superHeroInServiceRegister.migrateHeroes();
+        return "ok";
+    }
+
+    @GetMapping("/supervillain")
+    public String superVillain() {
+        superHeroInServiceRegister.migrateVillains();
         return "ok";
     }
 }
