@@ -39,48 +39,48 @@ public class TestController {
     }
 
     @SneakyThrows
-    @GetMapping("/fact")
+    @GetMapping("/api/fact")
     public String fact() {
         return randomFactRegister.getRandomFact();
     }
 
-    @GetMapping("/lord-of-the-rings/movies")
+    @GetMapping("/api/lord-of-the-rings/movies")
     public String lordOfTheRingsMovies() {
         List<LordOfTheRingsMovie> movies = lordOfTheRingsInServiceRegister.getMovies();
         return String.valueOf(movies);
     }
 
-    @GetMapping("/lord-of-the-rings/characters")
+    @GetMapping("/api/lord-of-the-rings/characters")
     public String lordOfTheRingsCharacters() {
         List<LordOfTheRingsCharacter> characters = lordOfTheRingsInServiceRegister.getCharacters();
         return String.valueOf(characters);
     }
 
-    @GetMapping("/star-wars/films")
+    @GetMapping("/api/star-wars/films")
     public String starWarsFilms() {
         List<StarWarsFilm> films = starWarsInServiceRegister.getFilms(1);
         return String.valueOf(films);
     }
 
-    @GetMapping("/star-wars/people")
+    @GetMapping("/api/star-wars/people")
     public String starWarsPeople() {
         List<StarWarsPerson> people = starWarsInServiceRegister.getPeople(1);
         return String.valueOf(people);
     }
 
-    @GetMapping("/star-wars/planets")
+    @GetMapping("/api/star-wars/planets")
     public String starWarsPlanets() {
         List<StarWarsPlanet> planets = starWarsInServiceRegister.getPlanets(1);
         return String.valueOf(planets);
     }
 
-    @GetMapping("/super-heroes")
+    @GetMapping("/api/super-heroes")
     public String superHeroes() {
         List<SuperHeroInServiceResponse> heroes = superHeroInService.getHeroes();
         return String.valueOf(heroes);
     }
 
-    @GetMapping("/super-villains")
+    @GetMapping("/api/super-villains")
     public String superVillains() {
         List<SuperHeroInServiceResponse> villains = superHeroInService.getVillains();
         return String.valueOf(villains);

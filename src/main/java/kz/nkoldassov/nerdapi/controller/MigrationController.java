@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/migration")
+@RequestMapping("/nerd/migration")
 public class MigrationController {
 
     @Autowired
