@@ -1,8 +1,8 @@
 package kz.nkoldassov.nerdapi.controller;
 
-import kz.nkoldassov.nerdapi.register.LordOfTheRingsInServiceRegister;
-import kz.nkoldassov.nerdapi.register.StarWarsInServiceRegister;
-import kz.nkoldassov.nerdapi.register.SuperHeroInServiceRegister;
+import kz.nkoldassov.nerdapi.register.LordOfTheRingsServiceRegister;
+import kz.nkoldassov.nerdapi.register.StarWarsServiceRegister;
+import kz.nkoldassov.nerdapi.register.SuperHeroServiceRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class MigrationController {
 
     @Autowired
-    private LordOfTheRingsInServiceRegister lordOfTheRingsInService;
+    private LordOfTheRingsServiceRegister lordOfTheRingsInService;
 
     @Autowired
-    private StarWarsInServiceRegister starWarsInServiceRegister;
+    private StarWarsServiceRegister starWarsServiceRegister;
 
     @Autowired
-    private SuperHeroInServiceRegister superHeroInServiceRegister;
+    private SuperHeroServiceRegister superHeroServiceRegister;
 
     @GetMapping("/lord-of-the-rings/movies")
     public String lordOfTheRingsMovies() {
@@ -37,31 +37,31 @@ public class MigrationController {
 
     @GetMapping("/star-wars/films")
     public String starWarsFilms() {
-        starWarsInServiceRegister.migrateFilms();
+        starWarsServiceRegister.migrateFilms();
         return "ok";
     }
 
     @GetMapping("/star-wars/people")
     public String starWarsPeople() {
-        starWarsInServiceRegister.migratePeople();
+        starWarsServiceRegister.migratePeople();
         return "ok";
     }
 
     @GetMapping("/star-wars/planets")
     public String starWarsPlanets() {
-        starWarsInServiceRegister.migratePlanets();
+        starWarsServiceRegister.migratePlanets();
         return "ok";
     }
 
     @GetMapping("/superhero")
     public String superHero() {
-        superHeroInServiceRegister.migrateHeroes();
+        superHeroServiceRegister.migrateHeroes();
         return "ok";
     }
 
     @GetMapping("/supervillain")
     public String superVillain() {
-        superHeroInServiceRegister.migrateVillains();
+        superHeroServiceRegister.migrateVillains();
         return "ok";
     }
 }

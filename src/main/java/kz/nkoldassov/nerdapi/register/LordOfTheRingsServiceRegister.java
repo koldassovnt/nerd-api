@@ -5,7 +5,7 @@ import kz.nkoldassov.nerdapi.db.model.LordOfTheRingsMovie;
 
 import java.util.List;
 
-public interface LordOfTheRingsInServiceRegister {
+public interface LordOfTheRingsServiceRegister {
 
     List<LordOfTheRingsMovie> getMovies();
 

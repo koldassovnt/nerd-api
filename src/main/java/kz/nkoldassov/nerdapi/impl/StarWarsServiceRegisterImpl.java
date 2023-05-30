@@ -12,7 +12,7 @@ import kz.nkoldassov.nerdapi.in_service.star_wars.model.people.StarWarsPersonDet
 import kz.nkoldassov.nerdapi.in_service.star_wars.model.planet.StarWarsPlanetDetailResponse;
 import kz.nkoldassov.nerdapi.in_service.star_wars.model.planet.StarWarsPlanetResponse;
 import kz.nkoldassov.nerdapi.logging.LOG;
-import kz.nkoldassov.nerdapi.register.StarWarsInServiceRegister;
+import kz.nkoldassov.nerdapi.register.StarWarsServiceRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ import java.util.List;
 import static kz.nkoldassov.nerdapi.util.InServiceUtil.getIdFromStarWarsApiUrl;
 
 @Component
-public class StarWarsInServiceRegisterImpl implements StarWarsInServiceRegister {
+public class StarWarsServiceRegisterImpl implements StarWarsServiceRegister {
 
     private final LOG log = LOG.forClass(getClass());
 

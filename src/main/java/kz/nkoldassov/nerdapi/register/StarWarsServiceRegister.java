@@ -6,7 +6,7 @@ import kz.nkoldassov.nerdapi.db.model.StarWarsPlanet;
 
 import java.util.List;
 
-public interface StarWarsInServiceRegister {
+public interface StarWarsServiceRegister {
 
     List<StarWarsFilm> getFilms(int page);
 

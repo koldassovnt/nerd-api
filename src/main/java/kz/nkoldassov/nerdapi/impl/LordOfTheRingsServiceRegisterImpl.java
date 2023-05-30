@@ -9,7 +9,7 @@ import kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.character.LordOf
 import kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.movie.LordOfTheRingsMovieDetailResponse;
 import kz.nkoldassov.nerdapi.in_service.lord_of_the_rings.model.movie.LordOfTheRingsMovieResponse;
 import kz.nkoldassov.nerdapi.logging.LOG;
-import kz.nkoldassov.nerdapi.register.LordOfTheRingsInServiceRegister;
+import kz.nkoldassov.nerdapi.register.LordOfTheRingsServiceRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class LordOfTheRingsInServiceRegisterImpl implements LordOfTheRingsInServiceRegister {
+public class LordOfTheRingsServiceRegisterImpl implements LordOfTheRingsServiceRegister {
 
     private final LOG log = LOG.forClass(getClass());
 

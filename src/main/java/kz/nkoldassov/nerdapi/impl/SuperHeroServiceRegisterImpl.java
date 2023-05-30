@@ -5,7 +5,7 @@ import kz.nkoldassov.nerdapi.db.model.SuperHeroOrVillain;
 import kz.nkoldassov.nerdapi.in_service.superhero.SuperHeroInService;
 import kz.nkoldassov.nerdapi.in_service.superhero.model.SuperHeroInServiceResponse;
 import kz.nkoldassov.nerdapi.logging.LOG;
-import kz.nkoldassov.nerdapi.register.SuperHeroInServiceRegister;
+import kz.nkoldassov.nerdapi.register.SuperHeroServiceRegister;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SuperHeroInServiceRegisterImpl implements SuperHeroInServiceRegister {
+public class SuperHeroServiceRegisterImpl implements SuperHeroServiceRegister {
 
     private final LOG log = LOG.forClass(getClass());
 

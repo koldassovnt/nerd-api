@@ -4,7 +4,7 @@ import kz.nkoldassov.nerdapi.db.model.SuperHeroOrVillain;
 
 import java.util.List;
 
-public interface SuperHeroInServiceRegister {
+public interface SuperHeroServiceRegister {
 
     List<SuperHeroOrVillain> getHeroes();
 
